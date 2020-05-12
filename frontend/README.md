@@ -1,5 +1,8 @@
-<h1 align="center">
+<h1 align="center" >
+<div style="background: #312e38">
 <img alt="GoStack" src=".github/logo.svg" />
+
+</div>
 </h1>
 
 ## 🚀 Sobre
