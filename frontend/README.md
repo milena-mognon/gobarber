@@ -1,5 +1,5 @@
 <h1 align="center" >
-<img alt="GoStack" src=".github/logo.png" />
+<img alt="GoBarber" src=".github/logo.PNG" />
 </h1>
 
 ## 🚀 Sobre
