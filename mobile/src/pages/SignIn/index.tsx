@@ -14,7 +14,7 @@ const SignIn: React.FC = () => {
       <Title>Faça seu Login</Title>
       <Input />
       <Input />
-      <Button>Entrar</Button>
+      <Button onPress={() => {}}>Entrar</Button>
     </Container>
   );
 };
