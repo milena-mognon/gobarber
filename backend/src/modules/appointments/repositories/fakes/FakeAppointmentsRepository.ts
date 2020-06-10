@@ -2,7 +2,7 @@ import { uuid } from 'uuidv4';
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentDTO from '@modules/appointments/dtos/ICreateAppointmentDTO';
-
+import { isEqual } from 'date-fns';
 /**
  * Fake repository don´t use DB, so everything about typeorm was deleted.
  * This will be used on unit tests. The services will 'call' the fake
@@ -14,8 +14,8 @@ class FakeAppointmentsRepository implements IAppointmentsRepository {
   private appointments: Appointment[] = [];
 
   public async findByDate(date: Date): Promise<Appointment | undefined> {
-    const findAppointments = this.appointments.find(
-      appointment => appointment.date === date,
+    const findAppointments = this.appointments.find(appointment =>
+      isEqual(appointment.date, date),
     );
 
     return findAppointments;
