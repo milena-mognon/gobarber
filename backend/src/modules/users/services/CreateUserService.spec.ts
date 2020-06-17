@@ -38,7 +38,7 @@ describe('Create User', () => {
 
     expect(user).toHaveProperty('id');
 
-    expect(
+    await expect(
       createUser.execute({
         name: 'Jane Doe 2',
         email: 'janedoe@mail.com',
