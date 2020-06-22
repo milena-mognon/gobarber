@@ -11,11 +11,6 @@ interface IRequestDTO {
   email: string;
 }
 
-// interface IResponse {
-//   user: User;
-//   token: string;
-// }
-
 @injectable()
 export default class SendForgotPasswordEmail {
   constructor(
@@ -36,11 +31,11 @@ export default class SendForgotPasswordEmail {
       throw new AppError('User does not exists');
     }
 
-    await this.userTokenRepository.generate(user.id);
+    const { token } = await this.userTokenRepository.generate(user.id);
 
-    this.mailProvider.sendMail(
+    await this.mailProvider.sendMail(
       email,
-      'Pedido de Recuperação de Senha recebido',
+      `Pedido de Recuperação de Senha recebido: ${token}`,
     );
   }
 }
