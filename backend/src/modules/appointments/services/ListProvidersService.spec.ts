@@ -1,17 +1,16 @@
-import AppError from '@shared/errors/AppError';
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import ListProvidersService from './ListProvidersService';
 
 let fakeUsersRepository: FakeUsersRepository;
 let listProviders: ListProvidersService;
 
-describe('Create User', () => {
+describe('List Providers', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     listProviders = new ListProvidersService(fakeUsersRepository);
   });
 
-  it('should be able to list the providers', async () => {
+  it('should be able to list the providers, except the logged', async () => {
     const provider1 = await fakeUsersRepository.create({
       name: 'Provider 1',
       email: 'provider1@mail.com',
