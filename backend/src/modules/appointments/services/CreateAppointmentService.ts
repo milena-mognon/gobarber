@@ -7,6 +7,7 @@ import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequestDTO {
   provider_id: string;
+  user_id: string;
   date: Date;
 }
 
@@ -25,6 +26,7 @@ class CreateAppointmentsService {
 
   public async execute({
     provider_id,
+    user_id,
     date,
   }: IRequestDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
@@ -34,11 +36,12 @@ class CreateAppointmentsService {
     );
 
     if (findAppointmentInSameDate) {
-      throw new AppError('This appointment is already booked');
+      throw new AppError('This date/hour is not available.');
     }
 
     const appointment = await this.appointmentsRepository.create({
       provider_id,
+      user_id,
       date: appointmentDate,
     });
 
