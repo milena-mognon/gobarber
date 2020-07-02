@@ -1,12 +1,12 @@
 <img alt="GoStack" src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/header-desafios.png" />
 
 <h3 align="center">
-  GOBARBER - Sistema para salão de beleza e barbearia
+  GOBARBER - Sistema para Barbearia
 </h3>
 
 ## :rocket: Sobre
 
-Sistema para gerenciamento de barbearias e/ou salão de beleza.
+Sistema para gerenciamento de barbearias.
 
 ## 🚀 Instalação e execução
 
