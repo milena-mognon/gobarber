@@ -6,8 +6,7 @@
 
 ## :rocket: Sobre
 
-Sistema para gerenciamento de barbearias.
-
+O GoBarbet é um sistema para gerenciamento de 
 ## 🚀 Instalação e execução
 
 1. Faça um clone desse repositório;
