@@ -1,7 +1,7 @@
 <p align="center">
-<img alt="GoStack" width="180" src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/header-desafios.png" />
+<img alt="GoStack" width="250" src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/header-desafios.png" />
 
-<img width="150" alt="GoStack" src=".github/logo.PNG" />
+<img width="230" alt="GoStack" src=".github/logo.PNG" />
 </p>
 
 <h2 align="center">
