@@ -101,18 +101,4 @@ describe('CreateAppointment', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
-
-  it('should not be able to create an appointment with less than one hour in advance', async () => {
-    jest.spyOn(Date, 'now').mockImplementation(() => {
-      return new Date(2020, 4, 10, 16, 50).getTime();
-    });
-
-    await expect(
-      createAppointmentService.execute({
-        date: new Date(2020, 4, 10, 15),
-        user_id: '789',
-        provider_id: '123',
-      }),
-    ).rejects.toBeInstanceOf(AppError);
-  });
 });

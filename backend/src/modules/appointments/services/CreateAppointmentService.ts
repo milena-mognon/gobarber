@@ -1,10 +1,4 @@
-import {
-  startOfHour,
-  isBefore,
-  getHours,
-  isAfter,
-  differenceInHours,
-} from 'date-fns';
+import { startOfHour, isBefore, getHours } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 
 import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
@@ -48,12 +42,6 @@ class CreateAppointmentsService {
     if (getHours(appointmentDate) < 8 || getHours(appointmentDate) > 17) {
       throw new AppError(
         'You can only create appointments between 8am and 5pm',
-      );
-    }
-
-    if (differenceInHours(appointmentDate, Date.now()) === 0) {
-      throw new AppError(
-        'You can only schedule an appointments with at least one hour in advance.',
       );
     }
 
