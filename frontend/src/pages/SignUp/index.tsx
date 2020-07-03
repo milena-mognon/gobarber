@@ -3,7 +3,7 @@ import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
 import { FormHandles } from '@unform/core';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import logo from '../../assets/logo.svg';
 import Input from '../../components/Input';
@@ -12,7 +12,7 @@ import getValidationErrors from '../../utils/getValidationErrors';
 import api from '../../services/api';
 import { useToast } from '../../hooks/Toast';
 
-interface SignIpFormData {
+interface SignUpFormData {
   name: string;
   email: string;
   password: string;
@@ -21,10 +21,9 @@ interface SignIpFormData {
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { addToast } = useToast();
-  const history = useHistory();
 
-  const handleSubmit = useCallback(
-    async (data: SignIpFormData) => {
+  const handleSignUp = useCallback(
+    async (data: SignUpFormData) => {
       try {
         formRef.current?.setErrors({});
 
@@ -47,8 +46,6 @@ const SignUp: React.FC = () => {
           title: 'Cadastro realizado com sucesso',
           description: 'Você já pode fazer seu login no GoBarber',
         });
-
-        history.push('/');
       } catch (err) {
         // só entra no if se for erro de validação
         if (err instanceof Yup.ValidationError) {
@@ -65,7 +62,7 @@ const SignUp: React.FC = () => {
         });
       }
     },
-    [history, addToast],
+    [addToast],
   );
 
   return (
@@ -75,7 +72,7 @@ const SignUp: React.FC = () => {
       <Content>
         <AnimationContainer>
           <img src={logo} alt="Logo GoBarber" />
-          <Form ref={formRef} onSubmit={handleSubmit}>
+          <Form ref={formRef} onSubmit={handleSignUp}>
             <h1>Faça seu Cadastro</h1>
 
             <Input name="name" icon={FiUser} placeholder="Nome" />
