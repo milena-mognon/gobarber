@@ -1,5 +1,6 @@
 declare namespace Express {
-  // axena o que for colocado aqui dentro no Request
+  // anexa o que for colocado aqui dentro no Request
+  // eslint-disable-next-line @typescript-eslint/interface-name-prefix
   export interface Request {
     user: {
       id: string;

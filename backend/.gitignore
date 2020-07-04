@@ -3,3 +3,4 @@ tmp/*
 !tmp/.gitkeep
 !tmp/uploads
 coverage
+.env
