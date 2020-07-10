@@ -8,5 +8,8 @@ declare namespace NodeJS {
     AWS_ACCESS_KEY_ID?: string;
     AWS_SECRET_ACCESS_KEY?: string;
     STORAGE_DRIVER: string;
+    REDIS_HOST: string;
+    REDIS_POST: string | number;
+    REDIS_PASS: string | undefined;
   }
 }
