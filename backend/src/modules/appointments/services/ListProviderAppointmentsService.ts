@@ -42,7 +42,6 @@ export default class ListProviderAppointmentsService {
         },
       );
 
-      console.log('Buscou do banco');
       await this.cacheProvider.save(cacheKey, appointments);
     }
 
