@@ -1,5 +1,12 @@
 import { injectable, inject } from 'tsyringe';
-import { getDaysInMonth, getDate } from 'date-fns';
+import {
+  getDaysInMonth,
+  getDate,
+  isPast,
+  isThisMonth,
+  isAfter,
+} from 'date-fns';
+import AppError from '@shared/errors/AppError';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
@@ -29,6 +36,13 @@ export default class ListProviderMonthAvailabilityService {
       { provider_id, month, year },
     );
 
+    if (
+      isPast(new Date(year, month - 1)) &&
+      !isThisMonth(new Date(year, month - 1))
+    ) {
+      throw new AppError('This month already passed');
+    }
+
     const numberOfDaysInMonth = getDaysInMonth(new Date(year, month - 1));
 
     /**
@@ -41,13 +55,16 @@ export default class ListProviderMonthAvailabilityService {
     );
 
     const availability = eachDayArray.map(day => {
+      const compareDate = new Date(year, month - 1, day, 23, 59, 59);
+
       const appointmentsInDay = appointments.filter(appointment => {
         return getDate(appointment.date) === day;
       });
 
       return {
         day,
-        available: appointmentsInDay.length < 10,
+        available:
+          isAfter(compareDate, new Date()) && appointmentsInDay.length < 10,
       };
     });
 

@@ -1,5 +1,6 @@
 import { injectable, inject } from 'tsyringe';
-import { getHours, isAfter } from 'date-fns';
+import { getHours, isAfter, isPast, isThisMonth } from 'date-fns';
+import AppError from '@shared/errors/AppError';
 import IAppointmentsRepository from '../repositories/IAppointmentsRepository';
 
 interface IRequest {
@@ -35,6 +36,13 @@ export default class ListProviderDayAvailabilityService {
         year,
       },
     );
+
+    if (
+      isPast(new Date(year, month - 1)) &&
+      !isThisMonth(new Date(year, month - 1))
+    ) {
+      throw new AppError('This month already passed');
+    }
 
     const hourStart = 8;
 
