@@ -3,7 +3,7 @@ import { FiLogIn, FiMail } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import * as Yup from 'yup';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Container, Content, Background, AnimationContainer } from './styles';
 import logo from '../../assets/logo.svg';
 import Input from '../../components/Input';
@@ -19,7 +19,6 @@ interface ForgotPasswordFormData {
 const ForgotPassword: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const formRef = useRef<FormHandles>(null);
-  // const history = useHistory();
   const { addToast } = useToast();
 
   const handleSubmit = useCallback(
@@ -48,9 +47,6 @@ const ForgotPassword: React.FC = () => {
           description:
             'Enviamos um e-mail para confirmar a recuperação de senha, cheque sua caixa de entrada',
         });
-        // recuperação de senha
-
-        // history.push('/dashboard');
       } catch (err) {
         // só entra no if se for erro de validação
         if (err instanceof Yup.ValidationError) {
