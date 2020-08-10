@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { View, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Feather';
 import { useAuth } from '../../hooks/Auth';
-
 import {
   Container,
   Header,
@@ -11,8 +11,16 @@ import {
   ProfileButton,
   UserAvatar,
   ProvidersList,
+  ProviderContainer,
+  ProviderAvatar,
+  ProviderInfo,
+  ProviderMeta,
+  ProviderName,
+  ProviderMetaText,
+  ProviderListTitle,
 } from './styles';
 import api from '../../services/api';
+import avatarImg from '../../assets/avatar.png';
 
 export interface Provider {
   id: string;
@@ -35,6 +43,13 @@ const Dashboard: React.FC = () => {
     signOut();
   }, [navigate]);
 
+  const navigateToCreateAppointment = useCallback(
+    (providerId: string) => {
+      navigate('CreateAppointment', { providerId });
+    },
+    [navigate],
+  );
+
   return (
     <Container>
       <Header>
@@ -51,8 +66,33 @@ const Dashboard: React.FC = () => {
 
       <ProvidersList
         data={providers}
+        ListHeaderComponent={
+          <ProviderListTitle>Cabeleireiros</ProviderListTitle>
+        }
         keyExtractor={provider => provider.id}
-        renderItem={({ item }) => <UserName>{item.name}</UserName>}
+        renderItem={({ item: provider }) => (
+          <ProviderContainer
+            onPress={() => navigateToCreateAppointment(provider.id)}
+          >
+            {provider.avatar_url ? (
+              <ProviderAvatar source={{ uri: provider.avatar_url }} />
+            ) : (
+              <ProviderAvatar source={avatarImg} />
+            )}
+
+            <ProviderInfo>
+              <ProviderName>{provider.name}</ProviderName>
+              <ProviderMeta>
+                <Icon name="calendar" size={14} color="#ff9000" />
+                <ProviderMetaText>Segunda à Sexta</ProviderMetaText>
+              </ProviderMeta>
+              <ProviderMeta>
+                <Icon name="clock" size={14} color="#ff9000" />
+                <ProviderMetaText>8h às 18h</ProviderMetaText>
+              </ProviderMeta>
+            </ProviderInfo>
+          </ProviderContainer>
+        )}
       />
     </Container>
   );
